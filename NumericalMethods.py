@@ -14,7 +14,7 @@ def f(n, x):
 def derivativef(n, x):
     de_y = 0.0
     for i in range(0, n):
-        de_y = de_y + coefficients[i] * pow(x, n-i-1)
+        de_y = de_y + coefficients[i] * (n-i)* pow(x, n-i-1)
     return de_y
 
 
