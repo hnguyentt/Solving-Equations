@@ -5,6 +5,12 @@ coefficients = []
 
 
 def f(n, x):
+    '''
+    Calculate the polygonal function f(n,x) given the coefficients and x.
+    :param n: degree of polygonal function
+    :param x: independent variable
+    :return: dependent variable y
+    '''
     y = 0.0
     for i in range(0, n+1):
         y = y + coefficients[i] * pow(x, n - i)
@@ -12,6 +18,12 @@ def f(n, x):
 
 
 def derivativef(n, x):
+    '''
+    Calculate the derivative of polygonal function f(n,x)
+    :param n: degree of polygonal function
+    :param x: independent variable
+    :return: derivative of f(n,x)
+    '''
     de_y = 0.0
     for i in range(0, n):
         de_y = de_y + coefficients[i] * (n-i)* pow(x, n-i-1)
@@ -19,6 +31,11 @@ def derivativef(n, x):
 
 
 def enterfx(n):
+    '''
+    Input and display the function
+    :param n: degree of polygonal function
+    :return: the coefficients and display the functions
+    '''
     func = 'y = '
     for i in range(0, n):
         a = float(input('Enter the coefficient a' + str(n - i) + ': '))
@@ -31,6 +48,12 @@ def enterfx(n):
 
 
 def printSolution(k, solution):
+    '''
+    Print the solution
+    :param k: k is the number of solutions
+    :param solution: solutions
+    :return:
+    '''
     s = ''
     if k == 0:
         s = 'The function does not have solutions in the defined range'
@@ -83,10 +106,10 @@ def newtonmethod(x1, tol, n, imax):
         return "Solution was not obtains in " + str(imax) + " iterations."
 
 
-def main():
+if __name__=="__main__":
     n = int(input('Enter the degree of the function: '))
     enterfx(n)
-    tol = float(input('Enter the desired tolerance: '))
+    tol = 0.00001
 
     print('\nINCREMENTAL SEARCH')
     k1, solution1 = incrementalSearch(tol, n)
@@ -95,10 +118,11 @@ def main():
     print('\nBISECTION SEARCH')
     x = numpy.linspace(-10, 10, 21)
     y = f(n, x)
-    z = 0
     pylab.plot(x, y)
     pylab.show()
+    pylab.close()
     vn = int(input('Basing on the graph showed, does the function have solutions? (Enter 0 for no solution): '))
+
     if vn != 0:
         print('Enter the [s1,s2] containing the solution:')
         s1 = float(input('- Enter s1: '))
@@ -106,13 +130,11 @@ def main():
         print(str(bisectionSearch(s1, s2, tol, n)))
 
     print('\nNEWTON METHOD')
-    epsilon = float(input("Enter the desired tolerance in f(x): "))
+    epsilon = 0.00005
     x1 = float(input("Enter starting point: "))
     imax = int(input("Enter the maximum number of iterations: "))
     print('Solution: ' + str(newtonmethod(x1, epsilon, n, imax)))
 
-
-main()
 
 
 
